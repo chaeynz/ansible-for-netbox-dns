@@ -1,0 +1,6 @@
+*.tar.gz
+venv/
+__pycache__/
+*.pyc
+ansible_collections/
+.vscode/
