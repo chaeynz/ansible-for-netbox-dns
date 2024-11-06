@@ -1,0 +1,26 @@
+---
+- name: "Netbox DNS Record"
+  hosts: localhost
+  tasks:
+    - name: "Create DNS record"
+      chaeynz.netbox_dns.netbox_nb_dns_record:
+        netbox_url: "{{ lookup('ansible.builtin.env', 'NETBOX_API') }}"
+        netbox_token: "{{ lookup('ansible.builtin.env', 'NETBOX_TOKEN') }}"
+        data:
+          name: "{{ name | default('ansible-test') }}"
+          zone: "{{ zone }}"
+          type: "A"
+          value: "203.0.113.0"
+          status: inactive
+          ttl: 113
+          description: "Funny description"
+          tags:
+            - some_tag
+          disable_ptr: true
+          tenant: "{{ tenant | default(omit) }}"
+        state: "{{ _state | default('present') }}"
+      register: v
+
+    - name: Debug
+      ansible.builtin.debug:
+        msg: "{{ v }}"
