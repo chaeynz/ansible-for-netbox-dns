@@ -4,3 +4,6 @@ __pycache__/
 *.pyc
 ansible_collections/
 .vscode/
+*.env
+module_docs.json
+.ansible/
