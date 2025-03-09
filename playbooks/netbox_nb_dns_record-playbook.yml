@@ -4,11 +4,15 @@
   vars:
     record_name: "ansible-test"
     zone: "int.vpulse.network"
+
+    credentials: &credentials
+      netbox_url: "{{ lookup('ansible.builtin.env', 'NETBOX_API') }}"
+      netbox_token: "{{ lookup('ansible.builtin.env', 'NETBOX_TOKEN') }}"
+
   tasks:
-    - name: "Create DNS record"
+    - name: "Test nb_dns_record module"
       chaeynz.netbox_dns.netbox_nb_dns_record:
-        netbox_url: "{{ lookup('ansible.builtin.env', 'NETBOX_API') }}"
-        netbox_token: "{{ lookup('ansible.builtin.env', 'NETBOX_TOKEN') }}"
+        <<: *credentials
         data:
           name: "{{ record_name }}"
           zone: "{{ zone }}"
