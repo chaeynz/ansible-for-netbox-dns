@@ -53,7 +53,7 @@ options:
         required: false
         type: raw
       ttl:
-        description: 
+        description:
           - Time-to-live (TTL) value for the DNS record, in seconds.
         required: false
         type: int
